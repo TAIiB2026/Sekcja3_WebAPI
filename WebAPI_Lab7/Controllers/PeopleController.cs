@@ -40,5 +40,18 @@ namespace WebAPI_Lab7.Controllers
             bool response = await peopleService.PostAsync(newPersonDTO);
             return Ok(response);
         }
-    }
+
+        [HttpPost("{id}/Address")]
+        public async Task<IActionResult> PostAddress(int id, [FromBody] NewAddressDTO dto)
+        {
+            await peopleService.PostAddress(id, dto.City, dto.PostalCode, dto.Street);
+            return Ok();
+        }
+
+        [HttpGet("{id}/Addresses")]
+        public async Task<IActionResult> GetAddresses(int id)
+        {
+            return Ok(await this.peopleService.GetAddresses(id));
+        }
+    } 
 }

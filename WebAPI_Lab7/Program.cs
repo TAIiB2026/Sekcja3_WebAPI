@@ -1,5 +1,7 @@
 
 using Contracts;
+using DAL;
+using Services.Database;
 using Services.Memory;
 
 namespace WebAPI_Lab7
@@ -17,8 +19,11 @@ namespace WebAPI_Lab7
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<PeopleContext>();
+
             //builder.Services.AddTransient<IPeopleService, PeopleService>();
-            builder.Services.AddScoped<IPeopleService, PeopleService>();
+            //builder.Services.AddScoped<IPeopleService, PeopleService>();
+            builder.Services.AddScoped<IPeopleService, PeopleDatabaseService>();
             //builder.Services.AddSingleton<IPeopleService, PeopleService>();
 
             const string POLICY_NAME = "ourCORS";
